@@ -41,6 +41,26 @@ namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.IsDeleted).IsRequired();
             builder.Property(u => u.Note).HasMaxLength(500);
             builder.ToTable("Users");
+
+            builder.HasData(new User
+            {
+                Id = 1,
+                RoleId = 1,
+                FirstName = "Mert",
+                LastName = "S",
+                Username = "mkjox",
+                Email = "mkjox@proton.me",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Description = "İlk Admin Kullanıcı",
+                Note = "Admin Kullanıcısı",
+                PasswordHash = Encoding.ASCII.GetBytes("9b64001fe26b18ca511ad1b0e4a314b0"),
+                Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSX4wVGjMQ37PaO4PdUVEAliSLi8-c2gJ1zvQ&usqp=CAU"
+            });
         }
     }
 }
