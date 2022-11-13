@@ -62,6 +62,9 @@ namespace ProgrammersBlog.Entities.Dtos
         [DisplayName("Aktif Mi?")]
         [Required(ErrorMessage = "{0} alanı boş geçilmelidir.")]
         public bool IsActive { get; set; }
+
+        [DisplayName("Silinsin Mi?")]
+        [Required(ErrorMessage = "{0} alanı boş geçilmelidir.")]
         public bool IsDeleted { get; set; }
     }
 }
