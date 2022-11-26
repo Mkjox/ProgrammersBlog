@@ -32,7 +32,7 @@ namespace ProgrammersBlog.Entities.Dtos
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         public bool IsActive { get; set; }
 
-        [DisplayName("Aktif Mi?")]
+        [DisplayName("Silindi Mi?")]
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         public bool IsDeleted { get; set; }
     }
