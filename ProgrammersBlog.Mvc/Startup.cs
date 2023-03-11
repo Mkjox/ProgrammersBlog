@@ -40,7 +40,8 @@ namespace ProgrammersBlog.Mvc
                     Name = "ProgrammersBlog",
                     HttpOnly = true,
                     SameSite = SameSiteMode.Strict,
-                    SecurePolicy = CookieSecurePolicy.SameAsRequest //Its not recommended to use as SameAsRequest so change to Always when you publish the site
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest
+                    //Its not recommended to use as SameAsRequest so change to Always when you publish the site.
                 };
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
