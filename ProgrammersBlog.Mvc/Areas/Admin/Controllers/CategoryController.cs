@@ -40,7 +40,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 var result = await _categoryService.Add(categoryAddDto, "Mert J");
                 if (result.ResultStatus == ResultStatus.Success)
                 {
-                    var categoryAddAjaxModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
+                    var categoryAddAjaxModel = JsonSerializer.Serialize(new UserAddAjaxViewModel
                     {
                         CategoryDto = result.Data,
                         CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
@@ -48,7 +48,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                     return Json(categoryAddAjaxModel);
                 }
             }
-            var categoryAddAjaxErrorModel = JsonSerializer.Serialize(new CategoryAddAjaxViewModel
+            var categoryAddAjaxErrorModel = JsonSerializer.Serialize(new UserAddAjaxViewModel
             {
                 CategoryAddPartial = await this.RenderViewToStringAsync("_CategoryAddPartial", categoryAddDto)
             });
