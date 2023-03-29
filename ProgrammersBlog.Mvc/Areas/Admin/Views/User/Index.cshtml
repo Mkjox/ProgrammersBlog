@@ -5,10 +5,10 @@
     ViewBag.Title = "Kullanıcılar Index";
 }
 
-<ol class="breadcrumb mb-3 mt-2">
+@*<ol class="breadcrumb mb-3 mt-2">
     <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
     <li class="breadcrumb-item active"><a asp-area="Admin" asp-controller="Category" asp-action="Index">Kullanıcılar</a></li>
-</ol>
+</ol>*@
 
 @if (Model.ResultStatus == ResultStatus.Success)
 {
@@ -16,7 +16,7 @@
     <div class="card mb-4 mt-2">
         <div class="card-header">
             <i class="fas fa-table mr-1"></i>
-            Kategoriler
+            Kullanıcılar
         </div>
         <div class="card-body">
             <div class="spinner-border" role="status" style="display: none;">
