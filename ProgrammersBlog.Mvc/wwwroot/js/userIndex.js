@@ -33,30 +33,22 @@
                         },
                         success: function (data) {
                             const userListDto = jQuery.parseJSON(data);
+                            dataTable.clear();
                             console.log(userListDto);
                             if (userListDto.ResultStatus === 0) {
-                                let tableBody = "";
                                 $.each(userListDto.Users.$values,
                                     function (index, user) {
-                                        tableBody += `
-                                                                                                    <tr>
-                                                                                                            <td>${user.Id}</td>
-                                                                                                            <td>${user.Name}</td>
-                                                                                                            <td>${user.Description}</td>
-                                                                                                            <td>${convertFirstLetterToUpperCase(user.IsActive.toString())}</td>
-                                                                                                            <td>${convertFirstLetterToUpperCase(user.IsDeleted.toString())}</td>
-                                                                                                            <td>${user.Note}</td>
-                                                                                                            <td>${convertToShortDate(user.CreatedDate)}</td>
-                                                                                                            <td>${user.CreatedByName}</td>
-                                                                                                            <td>${convertToShortDate(user.ModifiedDate)}</td>
-                                                                                                            <td>${user.ModifiedByName}</td>
-                                                                                                                    <td>
-                                                                    <button class="btn btn-primary btn-sm btn-block btn-update" data-id="${user.Id}"><span class="fas fa-edit"></span>Düzenle</button>
-                                                                    <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="${user.Id}"><span class="fas fa-minus-circle"></span>Sil</button>
-                                                                </td>
-                                                                                                    </tr>`;
+                                        dataTable.row.add([
+                                            user.Id,
+                                            user.UserName,
+                                            user.Email,
+                                            user.PhoneNumber,
+                                            `<img src="/img/${user.Picture}" alt="${user.UserName}" style="max-height: 50px; max-width: 50px;" />`,
+                                            `<button class="btn btn-primary btn-sm btn-block btn-update" data-id="${user.Id}"><span class="fas fa-edit"></span> Düzenle</button>
+                                    <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="${user.Id}"><span class="fas fa-minus-circle"></span> Sil</button>`
+                                        ]);
                                     });
-                                $('#usersTable > tbody').replaceWith(tableBody);
+                                dataTable.draw();
                                 $('.spinner-border').hide();
                                 $('#usersTable').fadeIn(1400);
                             }
@@ -149,10 +141,10 @@
                             userAddAjaxModel.UserDto.User.Email,
                             userAddAjaxModel.UserDto.User.PhoneNumber,
                             `<img src="/img/${userAddAjaxModel.UserDto.User.Picture}" alt="${userAddAjaxModel.UserDto.User.UserName}" style="max-height: 50px; max-width: 50px;" />`,
-                            `<td>
-                                    <button class="btn btn-primary btn-sm btn-block btn-update" data-id="userAddAjaxModel.UserDto.User.Id"><span class="fas fa-edit"></span> Düzenle</button>
-                                    <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="userAddAjaxModel.UserDto.User.Id"><span class="fas fa-minus-circle"></span> Sil</button>
-                                </td>`
+                            `
+                                    <button class="btn btn-primary btn-sm btn-block btn-update" data-id="${userAddAjaxModel.UserDto.User.Id}"><span class="fas fa-edit"></span> Düzenle</button>
+                                    <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="${userAddAjaxModel.UserDto.User.Id}"><span class="fas fa-minus-circle"></span> Sil</button>
+                                `
                         ]).draw();
                         toastr.success(`${userAddAjaxModel.UserDto.Message}`, 'Başarılı İşlem!');
                     }
