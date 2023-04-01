@@ -148,7 +148,7 @@
                             userAddAjaxModel.UserDto.User.UserName,
                             userAddAjaxModel.UserDto.User.Email,
                             userAddAjaxModel.UserDto.User.PhoneNumber,
-                            userAddAjaxModel.UserDto.User.Picture,
+                            `<img src="/img/${userAddAjaxModel.UserDto.User.Picture}" alt="${userAddAjaxModel.UserDto.User.UserName}" style="max-height: 50px; max-width: 50px;" />`,
                             `<td>
                                     <button class="btn btn-primary btn-sm btn-block btn-update" data-id="userAddAjaxModel.UserDto.User.Id"><span class="fas fa-edit"></span> Düzenle</button>
                                     <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="userAddAjaxModel.UserDto.User.Id"><span class="fas fa-minus-circle"></span> Sil</button>
