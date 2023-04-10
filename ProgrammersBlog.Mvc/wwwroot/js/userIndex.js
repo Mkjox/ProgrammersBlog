@@ -175,7 +175,7 @@
         const userName = tableRow.find('td:eq(1)').text();
         Swal.fire({
             title: 'Silmek istediğinize emin misiniz?',
-            text: `${userName} adlı kategori silinecektir!`,
+            text: `${userName} adlı kullanıcı silinecektir!`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -194,11 +194,11 @@
                         if (userDto.ResultStatus === 0) {
                             Swal.fire(
                                 'Silindi!',
-                                `${userDto.User.Name} adlı kategori başarıyla silinmiştir.`,
+                                `${userDto.User.UserName} adlı kullanıcı başarıyla silinmiştir.`,
                                 'success'
                             );
 
-                            tableRow.fadeOut(3500);
+                            dataTable.row(tableRow).remove().draw();
                         }
                         else {
                             Swal.fire({
