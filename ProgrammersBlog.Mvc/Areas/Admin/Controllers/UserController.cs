@@ -154,5 +154,20 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
             return fileName;
         }
+
+        public bool ImageDelete(string pictureName)
+        {
+            string wwwroot = _env.WebRootPath;
+            var fileToDelete = Path.Combine($"{wwwroot}/img", pictureName);
+            if (System.IO.File.Exists(fileToDelete))
+            {
+                System.IO.File.Delete(fileToDelete);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
