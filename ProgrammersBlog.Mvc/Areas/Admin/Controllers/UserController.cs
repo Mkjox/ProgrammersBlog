@@ -44,7 +44,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             {
                 Users = users,
                 ResultStatus = ResultStatus.Success
-            },new JsonSerializerOptions
+            }, new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve
             });
@@ -64,7 +64,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             {
                 userAddDto.Picture = await ImageUpload(userAddDto);
                 var user = _mapper.Map<User>(userAddDto);
-                var result = await _userManager.CreateAsync(user,userAddDto.Password);
+                var result = await _userManager.CreateAsync(user, userAddDto.Password);
                 if (result.Succeeded)
                 {
                     var userAddAjaxModel = JsonSerializer.Serialize(new UserAddAjaxViewModel
@@ -83,7 +83,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("",error.Description);
+                        ModelState.AddModelError("", error.Description);
                     }
                     var userAddAjaxErrorModel = JsonSerializer.Serialize(new UserAddAjaxViewModel
                     {
@@ -130,6 +130,13 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 });
                 return Json(deletedUserErrorModel);
             }
+        }
+
+        public async Task<PartialViewResult> Update(int userId)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var userUpdateDto = _mapper.Map<UserUpdateDto>(user);
+            return PartialView("_UserUpdatePartial", userUpdateDto);
         }
 
         public async Task<string> ImageUpload(UserAddDto userAddDto)

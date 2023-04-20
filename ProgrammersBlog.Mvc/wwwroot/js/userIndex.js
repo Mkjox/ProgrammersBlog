@@ -217,6 +217,7 @@
         });
     });
 
+    /* Ajax GET / Getting the _UserUpdatePartial as Modal Form starts from here */
     //#62 Update'in Modal Form olarak görüntülenmesi
     $(function () {
         const url = '/Admin/User/Update/';
