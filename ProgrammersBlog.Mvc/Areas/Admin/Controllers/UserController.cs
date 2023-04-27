@@ -62,7 +62,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                userAddDto.Picture = await ImageUpload(userAddDto);
+                userAddDto.Picture = await ImageUpload(userAddDto.UserName, userAddDto.PictureFile);
                 var user = _mapper.Map<User>(userAddDto);
                 var result = await _userManager.CreateAsync(user, userAddDto.Password);
                 if (result.Succeeded)
@@ -148,7 +148,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 bool isNewPictureUploaded = false;
                 var oldUser = await _userManager.FindByIdAsync(userUpdateDto.Id.ToString());
                 var oldUserPicture = oldUser.Picture;
-                if (userUpdateDto.PictureFile!=null)
+                if (userUpdateDto.PictureFile != null)
                 {
                     userUpdateDto.Picture = await ImageUpload(userUpdateDto.UserName, userUpdateDto.PictureFile);
                     isNewPictureUploaded = true;
