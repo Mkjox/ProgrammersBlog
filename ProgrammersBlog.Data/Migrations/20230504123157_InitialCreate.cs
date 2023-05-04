@@ -252,13 +252,40 @@ namespace ProgrammersBlog.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "49732482-17ae-43b8-b8f6-c4efcfb6f8a6", "Admin", "ADMIN" },
+                    { 2, "e2b17383-02e1-43cc-b72d-3796fbbe62f6", "Editor", "EDITOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Picture", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "ae65aecc-683a-404c-aec0-f7d921f1b53f", "adminuser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAIAAYagAAAAEOuOlIc5amwTauVQwku1zwHwkyl48yESQlXN/r1GTLv0ooL1eMnvUKpLHPwCRJYKZw==", "+905555555555", true, "defaultUser.png", "738a7fd7-4164-45c9-aace-ef0222e54257", false, "adminuser" },
+                    { 2, 0, "34fb768f-0ad3-41af-8205-28658693ee54", "editoruser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAIAAYagAAAAEIOs1dc2jkhXUSUHQJByKKtUWweAaJZAu/1k6nwg9NoJxXadvy82c+8m4JujqgrMwg==", "+905555555555", true, "defaultUser.png", "0c44f5eb-a40f-44d9-8108-41f5f97bae2e", false, "editoruser" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedByName", "CreatedDate", "Description", "IsActive", "IsDeleted", "ModifiedByName", "ModifiedDate", "Name", "Note" },
                 values: new object[,]
                 {
-                    { 1, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1638), "C# Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1639), "C#", "C# Blog Kategorisi" },
-                    { 2, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1644), "C++ Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1645), "C++", "C++ Blog Kategorisi" },
-                    { 3, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1650), "JavaScript Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 3, 2, 0, 53, 9, 363, DateTimeKind.Local).AddTicks(1651), "JavaScript", "JavaScript Blog Kategorisi" }
+                    { 1, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8900), "C# Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8900), "C#", "C# Blog Kategorisi" },
+                    { 2, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8903), "C++ Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8904), "C++", "C++ Blog Kategorisi" },
+                    { 3, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8907), "JavaScript Programlama Dili ile İlgili En Güncel Bilgiler", true, false, "InitialCreate", new DateTime(2023, 5, 4, 15, 31, 57, 383, DateTimeKind.Local).AddTicks(8907), "JavaScript", "JavaScript Blog Kategorisi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(
