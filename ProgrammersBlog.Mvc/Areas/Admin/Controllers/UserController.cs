@@ -265,6 +265,15 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<ViewResult> ChangeDetails()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var updateDto = _mapper.Map<UserUpdateDto>(user);
+            return View(updateDto);
+        }
+
         [Authorize(Roles = "Admin,Editor")]
         public async Task<string> ImageUpload(string userName, IFormFile pictureFile)
         {
