@@ -85,7 +85,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home",new {Area=""});
+            return RedirectToAction("Index", "Home", new { Area = "" });
         }
 
         [Authorize(Roles = "Admin")]
@@ -272,6 +272,52 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var updateDto = _mapper.Map<UserUpdateDto>(user);
             return View(updateDto);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ViewResult> ChangeDetails(UserUpdateDto userUpdateDto)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isNewPictureUploaded = false;
+                var oldUser = await _userManager.GetUserAsync(HttpContext.User);
+                var oldUserPicture = oldUser.Picture;
+                if (userUpdateDto.PictureFile != null)
+                {
+                    userUpdateDto.Picture = await ImageUpload(userUpdateDto.UserName, userUpdateDto.PictureFile);
+                    if (oldUserPicture != "defaultUser.png")
+                    {
+                        isNewPictureUploaded = true;
+
+                    }
+                }
+
+                var updatedUser = _mapper.Map<UserUpdateDto, User>(userUpdateDto, oldUser);
+                var result = await _userManager.UpdateAsync(updatedUser);
+                if (result.Succeeded)
+                {
+
+                    if (isNewPictureUploaded)
+                    {
+                        ImageDelete(oldUserPicture);
+                    }
+                    TempData.Add("SuccessMessage", $"{updatedUser.UserName} adlı kullanıcı başarıyla güncellenmiştir.");
+                    return View(userUpdateDto);
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(userUpdateDto);
+                }
+            }
+            else
+            {
+                return View(userUpdateDto);
+            }
         }
 
         [Authorize(Roles = "Admin,Editor")]
