@@ -35,7 +35,7 @@ namespace ProgrammersBlog.Mvc.Helpers.Concrete
             {
                 await pictureFile.CopyToAsync(stream);
             }
-            return new DataResult<UploadedImageDto>(ResultStatus.Success, $"{userName} adlı kullanıcının resmi başarıyla yüklenmiştir.", new UploadedImageDto
+            return new DataResult<UploadedImageDto>(ResultStatus.Error, $"{userName} adlı kullanıcının resmi başarıyla yüklenmiştir.", new UploadedImageDto
             {
                 FullName = $"{folderName}/{newFileName}",
                 OldName = oldFileName,
