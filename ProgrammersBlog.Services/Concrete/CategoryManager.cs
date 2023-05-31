@@ -26,6 +26,13 @@ namespace ProgrammersBlog.Services.Concrete
             _mapper = mapper;
         }
 
+
+        /// <summary>
+        /// İstenilen ID parametresine ait kategorileri getirir.
+        /// </summary>
+        /// <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak verileri getirir.</returns>
+        /// 
         public async Task<IDataResult<CategoryDto>> GetAsync(int categoryId)
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
@@ -45,6 +52,12 @@ namespace ProgrammersBlog.Services.Concrete
             });
         }
 
+        /// <summary>
+        /// Verilen ID parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner.
+        /// </summary>
+        /// <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak işlem sonucunu DataResult tipinde geriye döner.</returns>
+
         public async Task<IDataResult<CategoryUpdateDto>> GetCategoryUpdateDtoAsync(int categoryId)
         {
             var result = await _unitOfWork.Categories.AnyAsync(c => c.Id == categoryId);
@@ -60,6 +73,11 @@ namespace ProgrammersBlog.Services.Concrete
             }
         }
 
+        /// <summary>
+        /// Asenkron olarak tüm verileri getirir.
+        /// </summary>
+        /// <returns>Asenkron bir operasyon ile Task olarak tüm verileri DataResult tipinde geriye döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryListDto>> GetAllAsync()
         {
             var categories = await _unitOfWork.Categories.GetAllAsync(null);
@@ -79,6 +97,11 @@ namespace ProgrammersBlog.Services.Concrete
             });
         }
 
+        /// <summary>
+        /// Asenkron olarak silinmemiş tüm verileri getirir.
+        /// </summary>
+        /// <returns>Asenkron bir operasyon ile Task olarak silinmemiş tüm verileri DataResult tipinde geriye döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
         {
             var categories = await _unitOfWork.Categories.GetAllAsync(c => !c.IsDeleted);
@@ -97,6 +120,12 @@ namespace ProgrammersBlog.Services.Concrete
                 Message = Messages.Category.NotFound(isPlural: true)
             });
         }
+
+        /// <summary>
+        /// Asenkron olarak silinmemiş ve aktif olan tüm verileri getirir.
+        /// </summary>
+        /// <returns>Asenkron bir operasyon ile Task olarak silinmemiş ve aktif olan tüm verileri DataResult tipinde geriye döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync()
         {
             var categories = await _unitOfWork.Categories.GetAllAsync(c => !c.IsDeleted && c.IsActive);
@@ -111,6 +140,13 @@ namespace ProgrammersBlog.Services.Concrete
             return new DataResult<CategoryListDto>(ResultStatus.Error, Messages.Category.NotFound(isPlural: true), null);
         }
 
+        /// <summary>
+        /// Verilen CategoryAddDto ve CreatedByName parametrelerine ait bilgiler ile yeni bir Category ekler.
+        /// </summary>
+        /// <param name="categoryAddDto">categoryAddDto tipinde eklenecek kategori bilgilerini verir.</param>
+        /// <param name="createdByName">string tipinde kullanıcı adını verir.</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere kategori ekleme işleminin sonucunu DataResult tipinde döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto categoryAddDto, string createdByName)
         {
             var category = _mapper.Map<Category>(categoryAddDto);
@@ -126,6 +162,13 @@ namespace ProgrammersBlog.Services.Concrete
             });
         }
 
+        /// <summary>
+        /// Verilen CategoryUpdateDto ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi günceller.
+        /// </summary>
+        /// <param name="categoryUpdateDto">categoryUpdateDto tipinde güncellenecek kategori bilgilerini verir.</param>
+        /// <param name="modifiedByName">modifiedByName tipinde kategoriyi güncelleyen kullanıcı adını verir.</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi güncelleme işleminin sonucunu DataResult tipinde döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto categoryUpdateDto, string modifiedByName)
         {
             var oldCategory = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryUpdateDto.Id);
@@ -141,6 +184,13 @@ namespace ProgrammersBlog.Services.Concrete
             });
         }
 
+        /// <summary>
+        /// Verilen CategoryId ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi siler.
+        /// </summary>
+        /// <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+        /// <param name="modifiedByName">modifiedByName tipinde kategoriyi silen kullanıcı adını verir.</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi silme işleminin sonucunu DataResult tipinde döner.</returns>
+        /// 
         public async Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName)
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
@@ -166,6 +216,11 @@ namespace ProgrammersBlog.Services.Concrete
             });
         }
 
+        /// <summary>
+        /// Verilen CategoryId parametresine ait bilgiler ile Kategoriyi Veritabanından siler.
+        /// </summary>
+        /// <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere veritabanından kategoriyi silme işlemini DataResult tipinde döner.</returns>
         public async Task<IResult> HardDeleteAsync(int categoryId)
         {
             var category = await _unitOfWork.Categories.GetAsync(c => c.Id == categoryId);
@@ -178,6 +233,10 @@ namespace ProgrammersBlog.Services.Concrete
             return new Result(ResultStatus.Error, Messages.Category.NotFound(isPlural: false));
         }
 
+        /// <summary>
+        /// Asenkron olarak kategorilerin sayısını döner.
+        /// </summary>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere Kategori sayısını döndürür.</returns>
         public async Task<IDataResult<int>> CountAsync()
         {
             var categoriesCount = await _unitOfWork.Categories.CountAsync();
@@ -191,6 +250,10 @@ namespace ProgrammersBlog.Services.Concrete
             }
         }
 
+        /// <summary>
+        /// Asenkron olarak silinmemiş kategorilerin sayısını döner.
+        /// </summary>
+        /// <returns>Asenkron bir operasyon ile Task olarak bizlere silinmemiş Kategori sayısını döndürür.</returns>
         public async Task<IDataResult<int>> CountByNonDeletedAsync()
         {
             var categoriesCount = await _unitOfWork.Categories.CountAsync(c => !c.IsDeleted);
