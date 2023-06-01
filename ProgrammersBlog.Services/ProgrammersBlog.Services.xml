@@ -4,5 +4,162 @@
         <name>ProgrammersBlog.Services</name>
     </assembly>
     <members>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetAsync(System.Int32)">
+            <summary>
+            İstenilen ID parametresine ait kategorileri getirir.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak verileri getirir.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetCategoryUpdateDtoAsync(System.Int32)">
+            <summary>
+            Verilen ID parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asekron bir operasyon ile Task olarak işlem sonucu DataResult tipinde geriye döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetAllAsync">
+            <summary>
+            Asenkron olarak tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak işlem sonucunu DataResult tipinde geriye döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetAllByNonDeletedAsync">
+            <summary>
+            Asenkron olarak silinmemiş tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak silinmemiş tüm verileri DataResult tipinde geriye döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetAllByNonDeletedAndActiveAsync">
+            <summary>
+            Asenkron olarak silinmemiş ve aktif olan tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak silinmemiş ve aktif olan tüm verileri DataResult tipinde geriye döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.AddAsync(ProgrammersBlog.Entities.Dtos.CategoryAddDto,System.String)">
+            <summary>
+            Verilen CategoryAddDto ve CreatedByName parametrelerine ait bilgiler ile yeni bir Category ekler.
+            </summary>
+            <param name="categoryAddDto">categoryAddDto tipinde eklenecek kategori bilgilerini verir.</param>
+            <param name="createdByName">string tipinde kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere ekleme işleminin sonucunu DataResult tipinde döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.UpdateAsync(ProgrammersBlog.Entities.Dtos.CategoryUpdateDto,System.String)">
+            <summary>
+            Verilen CategoryUpdateDto ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi günceller.
+            </summary>
+            <param name="categoryUpdateDto">categoryUpdateDto tipinde güncellenecek kategori bilgilerini verir.</param>
+            <param name="modifiedByName">modifiedByName tipinde güncelleyen kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere güncelleme işleminin sonucunu DataResult tipinde döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.DeleteAsync(System.Int32,System.String)">
+            <summary>
+            Verilen CategoryId ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi siler.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <param name="modifiedByName">modifiedByName tipinde kategoriyi silen kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi silme işleminin sonucunu DataResult tipinde döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.HardDeleteAsync(System.Int32)">
+            <summary>
+            Verilen CategoryId parametresine ait bilgiler ile Kategoriyi Veritabanından siler.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere veritabanından kategoriyi silme işlemini DataResult tipinde döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.CountAsync">
+            <summary>
+            Asenkron olarak kategorilerin sayısını döner.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere Kategori sayısını döndürür.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.CountByNonDeletedAsync">
+            <summary>
+            Asenkron olarak silinmemiş kategorilerin sayısını döner.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere silinmemiş Kategori sayısını döndürür.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.GetAsync(System.Int32)">
+            <summary>
+            İstenilen ID parametresine ait kategorileri getirir.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak verileri getirir.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.GetCategoryUpdateDtoAsync(System.Int32)">
+            <summary>
+            Verilen ID parametresine ait kategorinin CategoryUpdateDto temsilini geriye döner.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak işlem sonucunu DataResult tipinde geriye döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.GetAllAsync">
+            <summary>
+            Asenkron olarak tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak tüm verileri DataResult tipinde geriye döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.GetAllByNonDeletedAsync">
+            <summary>
+            Asenkron olarak silinmemiş tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak silinmemiş tüm verileri DataResult tipinde geriye döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.GetAllByNonDeletedAndActiveAsync">
+            <summary>
+            Asenkron olarak silinmemiş ve aktif olan tüm verileri getirir.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak silinmemiş ve aktif olan tüm verileri DataResult tipinde geriye döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.AddAsync(ProgrammersBlog.Entities.Dtos.CategoryAddDto,System.String)">
+            <summary>
+            Verilen CategoryAddDto ve CreatedByName parametrelerine ait bilgiler ile yeni bir Category ekler.
+            </summary>
+            <param name="categoryAddDto">categoryAddDto tipinde eklenecek kategori bilgilerini verir.</param>
+            <param name="createdByName">string tipinde kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere kategori ekleme işleminin sonucunu DataResult tipinde döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.UpdateAsync(ProgrammersBlog.Entities.Dtos.CategoryUpdateDto,System.String)">
+            <summary>
+            Verilen CategoryUpdateDto ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi günceller.
+            </summary>
+            <param name="categoryUpdateDto">categoryUpdateDto tipinde güncellenecek kategori bilgilerini verir.</param>
+            <param name="modifiedByName">modifiedByName tipinde kategoriyi güncelleyen kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi güncelleme işleminin sonucunu DataResult tipinde döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.DeleteAsync(System.Int32,System.String)">
+            <summary>
+            Verilen CategoryId ve ModifiedByName parametrelerine ait bilgiler ile Kategoriyi siler.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <param name="modifiedByName">modifiedByName tipinde kategoriyi silen kullanıcı adını verir.</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi silme işleminin sonucunu DataResult tipinde döner.</returns>
+            
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.HardDeleteAsync(System.Int32)">
+            <summary>
+            Verilen CategoryId parametresine ait bilgiler ile Kategoriyi Veritabanından siler.
+            </summary>
+            <param name="categoryId">0'dan büyük integer bir ID değeri</param>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere veritabanından kategoriyi silme işlemini DataResult tipinde döner.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.CountAsync">
+            <summary>
+            Asenkron olarak kategorilerin sayısını döner.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere Kategori sayısını döndürür.</returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Concrete.CategoryManager.CountByNonDeletedAsync">
+            <summary>
+            Asenkron olarak silinmemiş kategorilerin sayısını döner.
+            </summary>
+            <returns>Asenkron bir operasyon ile Task olarak bizlere silinmemiş Kategori sayısını döndürür.</returns>
+        </member>
     </members>
 </doc>
