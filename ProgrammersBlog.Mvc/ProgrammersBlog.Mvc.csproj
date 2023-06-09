@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Remove="Views\Shared\_Layout.cshtml" />
+    <Content Remove="wwwroot\AdminLTE\js\articleAdd.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\AdminLTE\js\articleAdd.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +49,7 @@
     <None Include="wwwroot\AdminLTE\assets\demo\chart-pie-demo.js" />
     <None Include="wwwroot\AdminLTE\assets\demo\datatables-demo.js" />
     <None Include="wwwroot\AdminLTE\assets\img\error-404-monochrome.svg" />
+    <None Include="wwwroot\AdminLTE\js\articleAdd.js" />
     <None Include="wwwroot\AdminLTE\js\scripts.js" />
   </ItemGroup>
 
