@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+
+    // Trumbowyg
+
     $('#text-editor').trumbowyg({
         btns: [
             ['viewHTML'],
@@ -18,5 +21,13 @@
             ['fontfamily'],
             ['fontsize']
         ]
+    });
+
+    // Select2
+
+    $('#categoryList').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Lütfen bir kategori seçiniz...',
+        allowClear: true,
     });
 });
