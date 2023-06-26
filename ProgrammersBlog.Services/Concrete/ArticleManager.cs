@@ -105,7 +105,7 @@ namespace ProgrammersBlog.Services.Concrete
 
         public async Task<IResult> AddAsync(ArticleAddDto articleAddDto, string createdByName)
         {
-            var article = _mapper.Map<Article>(articleAddDto);
+            var article = _mapper.Map<Entities.Concrete.Article>(articleAddDto);
             article.CreatedByName = createdByName;
             article.ModifiedByName = createdByName;
             article.UserId = 1;
@@ -116,7 +116,7 @@ namespace ProgrammersBlog.Services.Concrete
 
         public async Task<IResult> UpdateAsync(ArticleUpdateDto articleUpdateDto, string modifiedByName)
         {
-            var article = _mapper.Map<Article>(articleUpdateDto);
+            var article = _mapper.Map<Entities.Concrete.Article>(articleUpdateDto);
             article.ModifiedByName = modifiedByName;
             await _unitOfWork.Articles.UpdateAsync(article);
             await _unitOfWork.SaveAsync();
