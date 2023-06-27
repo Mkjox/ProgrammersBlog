@@ -54,7 +54,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 var articleAddDto = Mapper.Map<ArticleAddDto>(articleAddViewModel);
                 var imageResult = await ImageHelper.Upload(articleAddViewModel.Title,articleAddViewModel.ThumbnailFile,PictureType.Post);
                 articleAddDto.Thumbnail = imageResult.Data.FullName;
-                var result = await _articleService.AddAsync(articleAddDto, LoggedInUser.UserName);
+                var result = await _articleService.AddAsync(articleAddDto, LoggedInUser.UserName,LoggedInUser.Id);
                 if (result.ResultStatus == ResultStatus.Success)
                 {
                     TempData.Add("SuccessMessage",result.Message);
@@ -63,9 +63,10 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", result.Message);
-                    return View(articleAddViewModel);
                 }
             }
+            var categories = await _categoryService.GetAllByNonDeletedAndActiveAsync();
+            articleAddViewModel.Categories = categories.Data.Categories;
             return View(articleAddViewModel);
         }
 
