@@ -117,7 +117,7 @@ namespace ProgrammersBlog.Services.Concrete
         public async Task<IResult> UpdateAsync(ArticleUpdateDto articleUpdateDto, string modifiedByName)
         {
             var oldArticle = await _unitOfWork.Articles.GetAsync(a => a.Id == articleUpdateDto.Id);
-            var article = _mapper.Map<ArticleUpdateDto,Entities.Concrete.Article>(articleUpdateDto,oldArticle);
+            var article = _mapper.Map<ArticleUpdateDto, Entities.Concrete.Article>(articleUpdateDto, oldArticle);
             article.ModifiedByName = modifiedByName;
             await _unitOfWork.Articles.UpdateAsync(article);
             await _unitOfWork.SaveAsync();
@@ -168,7 +168,7 @@ namespace ProgrammersBlog.Services.Concrete
 
         public async Task<IDataResult<int>> CountByNonDeletedAsync()
         {
-            var articlesCount = await _unitOfWork.Articles.CountAsync(a=>!a.IsDeleted);
+            var articlesCount = await _unitOfWork.Articles.CountAsync(a => !a.IsDeleted);
             if (articlesCount > -1)
             {
                 return new DataResult<int>(ResultStatus.Success, articlesCount);

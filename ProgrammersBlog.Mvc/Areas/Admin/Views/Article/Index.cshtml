@@ -54,7 +54,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach (var article in Model.Articles)
+                    @foreach (var article in Model.Articles.OrderByDescending(x=>x.ModifiedDate))
                     {
                         <tr>
                             <td>@article.Id</td>
