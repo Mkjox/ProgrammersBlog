@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -28,8 +29,19 @@ namespace ProgrammersBlog.Mvc
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IImageHelper, ImageHelper>();
+            services.AddSingleton(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UserProfile());
+                cfg.AddProfile(new CategoryProfile());
+                cfg.AddProfile(new ArticleProfile());
+                cfg.AddProfile(new ViewModelsProfile());
+                //cfg.AddProfile(new CommentProfile());
+            }));
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation().AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -81,6 +93,11 @@ namespace ProgrammersBlog.Mvc
                     areaName: "Admin",
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}"
                     );
+                /*endpoints.MapControllerRoute(
+                    name: "article",
+                    pattern: "{title}/{articleId}",
+                    defaults: new { controller = "Article", action"Detail" }
+                    );*/
                 endpoints.MapDefaultControllerRoute();
             });
         }

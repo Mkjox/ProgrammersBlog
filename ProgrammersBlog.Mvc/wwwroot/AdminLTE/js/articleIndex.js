@@ -28,20 +28,20 @@
                 action: function (e, dt, node, config) {
                     $.ajax({
                         type: 'GET',
-                        url: '/Admin/User/GetAllUsers/',
+                        url: '/Admin/Article/GetAllArticles/',
                         contentType: "application/json",
                         beforeSend: function () {
-                            $('#usersTable').hide();
+                            $('#articlesTable').hide();
                             $('.spinner-border').show();
                         },
                         success: function (data) {
-                            const userListDto = jQuery.parseJSON(data);
+                            const articleResult = jQuery.parseJSON(data);
                             dataTable.clear();
-                            console.log(userListDto);
-                            if (userListDto.ResultStatus === 0) {
-                                $.each(userListDto.Users.$values,
-                                    function (index, user) {
-                                        const newTableRow = dataTable.row.add([
+                            console.log(articleResult);
+                            if (articleResult.ResultStatus === 0) {
+                                $.each(articleResult.Data.Articles.$values,
+                                    function (index, article) {
+                                        const newArticle = dataTable.row.add([
                                             user.Id,
                                             user.UserName,
                                             user.Email,
@@ -113,10 +113,10 @@
         event.preventDefault();
         const id = $(this).attr('data-id');
         const tableRow = $(`[name="${id}"]`);
-        const userName = tableRow.find('td:eq(1)').text();
+        const articleTitle = tableRow.find('td:eq(2)').text();
         Swal.fire({
             title: 'Silmek istediğinize emin misiniz?',
-            text: `${userName} adlı kullanıcı silinecektir!`,
+            text: `${articleTitle} başlıklı makale silinecektir!`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -128,14 +128,14 @@
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
-                    data: { userId: id },
-                    url: '/Admin/User/Delete/',
+                    data: { articleId: id },
+                    url: '/Admin/Article/Delete/',
                     success: function (data) {
-                        const userDto = jQuery.parseJSON(data);
-                        if (userDto.ResultStatus === 0) {
+                        const articleResult = jQuery.parseJSON(data);
+                        if (articleResult.ResultStatus === 0) {
                             Swal.fire(
                                 'Silindi!',
-                                `${userDto.User.UserName} adlı kullanıcı başarıyla silinmiştir.`,
+                                `${articleResult.Message}`,
                                 'success'
                             );
 
@@ -145,7 +145,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Başarısız İşlem!',
-                                text: `${userDto.Message}`,
+                                text: `${articleResult.Message}`,
                             });
                         }
                     },
