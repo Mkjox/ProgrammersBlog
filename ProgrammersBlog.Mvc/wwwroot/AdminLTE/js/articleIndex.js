@@ -38,34 +38,46 @@
                             const articleResult = jQuery.parseJSON(data);
                             dataTable.clear();
                             console.log(articleResult);
-                            if (articleResult.ResultStatus === 0) {
+                            if (articleResult.Data.ResultStatus === 0) {
                                 $.each(articleResult.Data.Articles.$values,
                                     function (index, article) {
-                                        const newArticle = dataTable.row.add([
-                                            user.Id,
-                                            user.UserName,
-                                            user.Email,
-                                            user.PhoneNumber,
-                                            `<img src="/img/${user.Picture}" alt="${user.UserName}" class="my-image-table" />`,
-                                            `<button class="btn btn-primary btn-sm btn-block btn-update" data-id="${user.Id}"><span class="fas fa-edit"></span> Düzenle</button>
-                                    <button class="btn btn-danger btn-sm btn-block btn-delete" data-id="${user.Id}"><span class="fas fa-minus-circle"></span> Sil</button>`
+                                        const newArticle = getJsonNetObject(article, articleResult.Data.Articles.$values);
+                                        console.log(newArticle);
+                                        const newTableRow = dataTable.row.add([
+                                            newArticle.Id,
+                                            newArticle.Category.Name,
+                                            newArticle.Title,
+                                            `<img src="/img/${newArticle.Thumbnail}" alt="${newArticle.Title}" class="my-image-table" />`,
+                                            `${convertToShortDate(newArticle.Date)}`,
+                                            newArticle.ViewCount,
+                                            newArticle.CommentCount,
+                                            `${newArticle.IsActive ? "Evet" : "Hayır"}`,
+                                            `${newArticle.IsDeleted ? "Evet" : "Hayır"}`,
+                                            `${convertToShortDate(newArticle.CreatedDate)}`,
+                                            newArticle.CreatedByName,
+                                            `${convertToShortDate(newArticle.ModifiedDate)}`,
+                                            newArticle.ModifiedByName,
+                                            `
+                                <button class="btn btn-primary btn-sm btn-update" data-id="${newArticle.Id}"><span class="fas fa-edit"></span></button>
+                                <button class="btn btn-danger btn-sm btn-delete" data-id="${newArticle.Id}"><span class="fas fa-minus-circle"></span></button>
+                                            `
                                         ]).node();
                                         const jqueryTableRow = $(newTableRow);
-                                        jqueryTableRow.attr('name', `${user.Id}`);
+                                        jqueryTableRow.attr('name', `${newArticle.Id}`);
                                     });
                                 dataTable.draw();
                                 $('.spinner-border').hide();
-                                $('#usersTable').fadeIn(1400);
+                                $('#articlesTable').fadeIn(1400);
                             }
                             else {
-                                toastr.error(`${userListDto.Message}`, 'İşlem Başarısız!');
+                                toastr.error(`${articleResult.Data.Message}`, 'İşlem Başarısız!');
 
                             }
                         },
                         error: function (err) {
                             console.log(err);
                             $('.spinner-border').hide();
-                            $('#usersTable').fadeIn(1000);
+                            $('#articlesTable').fadeIn(1000);
                             toastr.error(`${err.responseText}`, 'Hata!');
                         }
                     })
