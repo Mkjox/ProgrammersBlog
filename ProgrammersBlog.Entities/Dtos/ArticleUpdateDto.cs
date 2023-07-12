@@ -29,7 +29,7 @@ namespace ProgrammersBlog.Entities.Dtos
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
         [MaxLength(250, ErrorMessage = "{0} alanı {1} karakterden büyük olmamalıdır.")]
         [MinLength(5, ErrorMessage = "{0} alanı {1} karakterden küçük olmamalıdır.")]
-        public string Thumbnail { get; set; }
+        public string? Thumbnail { get; set; }
 
         [DisplayName("Tarih")]
         [Required(ErrorMessage = "{0} alanı boş geçilmemelidir.")]
