@@ -26,12 +26,14 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
         {
             _commentService = commentService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var result = await _commentService.GetAllByNonDeletedAsync();
             return View(result.Data);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllComments()
         {
@@ -64,6 +66,18 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
             var commentResult = JsonSerializer.Serialize(result);
             return Json(commentResult);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Approve(int commentId)
+        {
+            var result = await _commentService.ApproveAsync(commentId, LoggedInUser.UserName);
+            var commentResult = JsonSerializer.Serialize(result,new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+            return Json(commentResult);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Update(int commentId)
         {
@@ -77,6 +91,7 @@ namespace ProgrammersBlog.Mvc.Areas.Admin.Controllers
                 return NotFound();
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Update(CommentUpdateDto commentUpdateDto)
         {
