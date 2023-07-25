@@ -9,15 +9,6 @@
             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         buttons: [
             {
-                text: 'Ekle',
-                attr: {
-                    id: "btnAdd",
-                },
-                className: 'btn btn-success',
-                action: function (e, dt, node, config) {
-                }
-            },
-            {
                 text: 'Yenile',
                 className: 'btn btn-warning',
                 action: function (e, dt, node, config) {
@@ -204,16 +195,12 @@
                     success: function (data) {
                         const commentUpdateAjaxModel = jQuery.parseJSON(data);
                         console.log(commentUpdateAjaxModel);
-                        //if (commentUpdateAjaxModel) {
-                        //    const id = commentUpdateAjaxModel.CommentDto.Comment.Id;
-                        //    const tableRow = $(`[name="${id}"]`);
-                        //}
-                        const id = commentUpdateAjaxModel.CommentDto.Comment.Id;
-                        const tableRow = $(`[name="${id}"]`);
                         const newFormBody = $('.modal-body', commentUpdateAjaxModel.CommentUpdatePartial);
                         placeHolderDiv.find('.modal-body').replaceWith(newFormBody);
                         const isValid = newFormBody.find('[name="IsValid"]').val() === 'True';
                         if (isValid) {
+                            const id = commentUpdateAjaxModel.CommentDto.Comment.Id;
+                            const tableRow = $(`[name="${id}"]`);
                             placeHolderDiv.find('.modal').modal('hide');
                             dataTable.row(tableRow).data([
                                 commentUpdateAjaxModel.CommentDto.Comment.Id,
@@ -245,11 +232,13 @@
                     }
                 });
             });
+
     });
 
-    //Get Detail Ajax Operation
+    // Get Detail Ajax Operation
 
-    $(function () {
+    $(function() {
+
         const url = '/Admin/Comment/GetDetail/';
         const placeHolderDiv = $('#modalPlaceHolder');
         $(document).on('click',
@@ -264,6 +253,7 @@
                     toastr.error(`${err.responseText}`, 'Hata!');
                 });
             });
+
     });
 
     /* Ajax POST / Deleting a Comment starts from here */
@@ -315,6 +305,7 @@
                                     `${commentResult.Data.Comment.Id} no'lu yorum başarıyla onaylanmıştır.`,
                                     'success'
                                 );
+
                             } else {
                                 Swal.fire({
                                     icon: 'error',
@@ -331,7 +322,7 @@
                 }
             });
         });
-
+    
     function getButtonsForDataTable(comment) {
         if (!comment.IsActive) {
             return `
