@@ -1041,7 +1041,7 @@ namespace ProgrammersBlog.Data.Migrations
                             FirstName = "Admin",
                             GitHubLink = "https://github.com/adminuser",
                             InstagramLink = "https://instagram.com/adminuser",
-                            LastName = "User",
+                             LastName = "User",
                             LinkedInLink = "https://linkedin.com/adminuser",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
