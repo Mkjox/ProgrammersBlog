@@ -10,6 +10,6 @@ namespace ProgrammersBlog.Entities.Dtos
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public bool HashRole { get; set; }
+        public bool HasRole { get; set; }
     }
 }
