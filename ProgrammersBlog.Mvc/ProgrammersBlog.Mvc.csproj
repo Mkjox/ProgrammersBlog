@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="Areas\Admin\Views\Comment\_CommentDetailPartial.cshtml" />
     <Content Remove="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Remove="Areas\Admin\Views\Role\_RoleAssignPartial.cshtml" />
     <Content Remove="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Remove="Views\Shared\_Layout.cshtml" />
     <Content Remove="wwwroot\AdminLTE\js\articleAdd.js" />
@@ -49,6 +50,7 @@
     <None Include="Areas\Admin\Views\Comment\_CommentDetailPartial.cshtml" />
     <None Include="Areas\Admin\Views\Comment\_CommentUpdatePartial.cshtml" />
     <None Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <None Include="Areas\Admin\Views\Role\_RoleAssignPartial.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="wwwroot\AdminLTE\assets\demo\chart-area-demo.js" />
