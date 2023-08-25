@@ -43,6 +43,8 @@ namespace ProgrammersBlog.Services.Abstract
         /// <returns>Asenkron bir operasyon ile Task olarak silinmemiş ve aktif olan tüm verileri DataResult tipinde geriye döner.</returns>
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActiveAsync();
 
+        Task<IDataResult<CategoryListDto>> GetAllByDeletedAsync();
+
         /// <summary>
         /// Verilen CategoryAddDto ve CreatedByName parametrelerine ait bilgiler ile yeni bir Category ekler.
         /// </summary>
@@ -66,6 +68,8 @@ namespace ProgrammersBlog.Services.Abstract
         /// <param name="modifiedByName">modifiedByName tipinde kategoriyi silen kullanıcı adını verir.</param>
         /// <returns>Asenkron bir operasyon ile Task olarak bizlere kategoriyi silme işleminin sonucunu DataResult tipinde döner.</returns>
         Task<IDataResult<CategoryDto>> DeleteAsync(int categoryId, string modifiedByName);
+
+        Task<IDataResult<CategoryDto>> UndoDeleteAsync(int categoryId, string modifiedByName);
 
         /// <summary>
         /// Verilen CategoryId parametresine ait bilgiler ile Kategoriyi Veritabanından siler.

@@ -36,6 +36,11 @@ namespace ProgrammersBlog.Services.Utilities
             {
                 return $"{categoryName} adlı kategori başarıyla veritabanından silinmiştir.";
             }
+
+            public static string UndoDelete(string categoryName)
+            {
+                return $"{categoryName} adlı kategori başarıyla arşivden geri getirilmiştir.";
+            }
         }
 
         public static class Article
@@ -46,24 +51,29 @@ namespace ProgrammersBlog.Services.Utilities
                 return "Böyle bir makale bulunamadı.";
             }
 
-            public static string Add(string articleName)
+            public static string Add(string articleTitle)
             {
-                return $"{articleName} başlıklı makale başarıyla eklenmiştir.";
+                return $"{articleTitle} başlıklı makale başarıyla eklenmiştir.";
             }
 
-            public static string Update(string articleName)
+            public static string Update(string articleTitle)
             {
-                return $"{articleName} başlıklı makale başarıyla güncellenmiştir.";
+                return $"{articleTitle} başlıklı makale başarıyla güncellenmiştir.";
             }
 
-            public static string Delete(string articleName)
+            public static string Delete(string articleTitle)
             {
-                return $"{articleName} başlıklı makale başarıyla silinmiştir.";
+                return $"{articleTitle} başlıklı makale başarıyla silinmiştir.";
             }
 
-            public static string HardDelete(string articleName)
+            public static string HardDelete(string articleTitle)
             {
-                return $"{articleName} başlıklı makale başarıyla veritabanından silinmiştir.";
+                return $"{articleTitle} başlıklı makale başarıyla veritabanından silinmiştir.";
+            }
+
+            public static string UndoDelete(string articleTitle)
+            {
+                return $"{articleTitle} başlıklı makale başarıyla arşivden geri getirilmiştir.";
             }
         }
         public static class Comment
@@ -95,6 +105,11 @@ namespace ProgrammersBlog.Services.Utilities
             public static string HardDelete(string createdByName)
             {
                 return $"{createdByName} tarafından eklenen yorum başarıyla veritabanından silinmiştir.";
+            }
+
+            public static string UndoDelete(string createdByName)
+            {
+                return $"{createdByName} tarafından eklenen yorum başarıyla arşivden geri getirilmiştir.";
             }
         }
     }
