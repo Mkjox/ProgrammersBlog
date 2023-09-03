@@ -60,6 +60,26 @@
     <None Include="wwwroot\AdminLTE\assets\img\error-404-monochrome.svg" />
     <None Include="wwwroot\AdminLTE\js\articleAdd.js" />
     <None Include="wwwroot\AdminLTE\js\scripts.js" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\BlogHome\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\BlogHome\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
   <ItemGroup>
