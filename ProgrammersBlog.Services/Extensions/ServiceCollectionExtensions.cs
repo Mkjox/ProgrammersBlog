@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProgrammersBlog.Data.Abstract;
 using ProgrammersBlog.Data.Concrete;
@@ -16,10 +17,10 @@ namespace ProgrammersBlog.Services.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection LoadMyServices(this IServiceCollection serviceCollection,string connectionString)
+        public static IServiceCollection LoadMyServices(this IServiceCollection serviceCollection, string connectionString)
         {
-            serviceCollection.AddDbContext<ProgrammersBlogContext>(options=> options.UseSqlServer(connectionString));
-            serviceCollection.AddIdentity<User,Role>(options =>
+            serviceCollection.AddDbContext<ProgrammersBlogContext>(options => options.UseSqlServer(connectionString));
+            serviceCollection.AddIdentity<User, Role>(options =>
             {
                 // User Password Options
                 options.Password.RequireDigit = false;
@@ -32,6 +33,10 @@ namespace ProgrammersBlog.Services.Extensions
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<ProgrammersBlogContext>();
+            serviceCollection.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.FromMinutes(15);
+            });
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceCollection.AddScoped<ICategoryService, CategoryManager>();
             serviceCollection.AddScoped<IArticleService, ArticleManager>();
