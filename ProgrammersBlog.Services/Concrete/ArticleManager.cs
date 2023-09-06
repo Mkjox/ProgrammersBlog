@@ -16,9 +16,9 @@ using static ProgrammersBlog.Services.Utilities.Messages;
 
 namespace ProgrammersBlog.Services.Concrete
 {
-    public class ArticleManager : ManagerBase,IArticleService
+    public class ArticleManager : ManagerBase, IArticleService
     {
-        public ArticleManager(IUnitOfWork unitOfWork, IMapper mapper):base(unitOfWork,mapper)
+        public ArticleManager(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
         }
 
@@ -219,6 +219,16 @@ namespace ProgrammersBlog.Services.Concrete
                 return new Result(ResultStatus.Success, Messages.Article.UndoDelete(article.Title));
             }
             return new Result(ResultStatus.Error, Messages.Article.NotFound(isPlural: false));
+        }
+
+        public async Task<IDataResult<ArticleListDto>> GetAllByViewCountAsync(bool isAscending, int? takeSize)
+        {
+            var articles = await UnitOfWork.Articles.GetAllAsync(a => a.IsActive && !a.IsDeleted, a => a.Category, a => a.User);
+            var sortedArticles = isAscending ? articles.OrderBy(a => a.ViewsCount) : articles.OrderByDescending(a => a.ViewsCount);
+            return new DataResult<ArticleListDto>(ResultStatus.Success, new ArticleListDto
+            {
+                Articles = takeSize == null ? sortedArticles.ToList() : sortedArticles.Take(takeSize.Value).ToList()
+            });
         }
     }
 }
