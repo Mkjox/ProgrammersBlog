@@ -12,7 +12,6 @@ using ProgrammersBlog.Services.Utilities;
 using ProgrammersBlog.Shared.Utilities.Results.Abstract;
 using ProgrammersBlog.Shared.Utilities.Results.ComplexTypes;
 using ProgrammersBlog.Shared.Utilities.Results.Concrete;
-using static ProgrammersBlog.Services.Utilities.Messages;
 
 namespace ProgrammersBlog.Services.Concrete
 {

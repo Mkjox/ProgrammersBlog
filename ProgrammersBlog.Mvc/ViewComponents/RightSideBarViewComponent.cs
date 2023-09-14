@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProgrammersBlog.Mvc.Models;
 using ProgrammersBlog.Services.Abstract;
 
 namespace ProgrammersBlog.Mvc.ViewComponents
@@ -20,8 +21,8 @@ namespace ProgrammersBlog.Mvc.ViewComponents
             var articlesResult = await _articleService.GetAllByViewCountAsync(isAscending: false, takeSize: 5);
             return View(new RightSideBarViewModel
             {
-                categoriesResult = categoriesResult.Data.Categories,
-                articlesResult = articlesResult.Data.Articles
+                Categories = categoriesResult.Data.Categories,
+                Articles = articlesResult.Data.Articles
             });
         }
     }
