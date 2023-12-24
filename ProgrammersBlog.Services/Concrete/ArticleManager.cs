@@ -25,9 +25,10 @@ namespace ProgrammersBlog.Services.Concrete
 
         public async Task<IDataResult<ArticleDto>> GetAsync(int articleId)
         {
-            var article = await UnitOfWork.Articles.GetAsync(a => a.Id == articleId, a => a.User, a => a.Category, a => a.Comments);
+            var article = await UnitOfWork.Articles.GetAsync(a => a.Id == articleId, a => a.User, a => a.Category);
             if (article != null)
             {
+                article.Comments = await UnitOfWork.Comments.GetAllAsync(c => c.ArticleId == articleId && !c.IsDeleted && c.IsActive);
                 return new DataResult<ArticleDto>(ResultStatus.Success, new ArticleDto
                 {
                     Article = article,
@@ -270,7 +271,7 @@ namespace ProgrammersBlog.Services.Concrete
                 (a)=>a.Category.Name.Contains(keyword),
                 (a)=>a.SeoDescription.Contains(keyword),
                 (a)=>a.SeoTags.Contains(keyword)
-            }, a=>a.Category, a=>a.User);
+            }, a => a.Category, a => a.User);
 
             var searchedAndSortedArticles = isAscending ? searchedArticles.OrderBy(a => a.Date).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() : searchedArticles.OrderByDescending(a => a.Date).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
             return new DataResult<ArticleListDto>(ResultStatus.Success, new ArticleListDto
