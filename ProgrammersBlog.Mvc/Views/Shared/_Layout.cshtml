@@ -53,7 +53,6 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            
             @RenderBody()
 
             <!-- Sidebar Widgets Column -->
@@ -76,7 +75,7 @@
     <script src="~/BlogHome/vendor/jquery/jquery.min.js"></script>
     <script src="~/BlogHome/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
-    @RenderSection("Scripts", false)
+    @await RenderSectionAsync("Scripts", false)
 </body>
 
 </html>
